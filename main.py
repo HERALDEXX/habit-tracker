@@ -11,7 +11,9 @@ from habit_engine.habit_io import (
     save_daily_logs,
     initialize_data_files,
     make_files_writable,
-    make_files_readonly
+    make_files_readonly,
+    reset_app_data,
+    clear_tracking_data
 )
 from habit_engine.habit_logic import (
     update_streaks,
@@ -21,6 +23,7 @@ from habit_engine.habit_display import (
     display_logs,
     display_app_info
 )
+from habit_engine.habit_visualization import visualize_habit_streak
 import sys
 
 def debug_print(message):
@@ -55,13 +58,12 @@ if __name__ == "__main__":
                 display_logs(daily_logs, habit_streaks)
                 handle_program_exit()
             elif sys.argv[1] in ['-c-logs', '--clear-logs']:
-                if save_daily_logs([], {}):
-                    handle_program_exit(message="\nLogs cleared successfully!")
-                handle_program_exit(1, "\nError: Failed to clear logs")
+                if clear_tracking_data():
+                    handle_program_exit(message="\nAll tracking data (logs, streaks, and plots) cleared successfully!")
+                handle_program_exit(1, "\nError: Failed to clear tracking data")
             elif sys.argv[1] in ['-r', '--reset']:
-                habits = []
-                if save_habits(habits) and save_daily_logs([], {}):
-                    handle_program_exit(message="\nProgram has been reset. Run without arguments to start fresh.")
+                if reset_app_data():
+                    handle_program_exit(message="\nProgram has been reset. All data and plots cleared. Run without arguments to start fresh.")
                 handle_program_exit(1, "\nError: Failed to reset program data")
             elif sys.argv[1] in ['-i', '--info']:
                 display_app_info()
@@ -74,12 +76,30 @@ if __name__ == "__main__":
                 if make_files_readonly():
                     handle_program_exit(message="\nCore files are now read-only and protected.")
                 handle_program_exit(1, "\nError: Failed to make files read-only")
+            elif sys.argv[1] in ['-p', '--plot']:
+                if not habits:
+                    handle_program_exit(1, "\nNo habits found. Please set up habits first.")
+                print("\nAvailable habits:")
+                for i, habit in enumerate(habits, 1):
+                    print(f"{i}. {habit}")
+                try:
+                    choice = input("\nEnter the number of the habit to visualize: ").strip()
+                    idx = int(choice) - 1
+                    if 0 <= idx < len(habits):
+                        if visualize_habit_streak(daily_logs, habits[idx]):
+                            handle_program_exit(message="\nVisualization created successfully!")
+                    else:
+                        handle_program_exit(1, "\nInvalid habit number selected.")
+                except (ValueError, IndexError):
+                    handle_program_exit(1, "\nInvalid input. Please enter a valid number.")
+                handle_program_exit(1, "\nFailed to create visualization.")
             else:
                 print("Invalid option. Use:")
                 print("  -i or --info to display application information")
                 print("  -v-logs or --view-logs to view logs")
                 print("  -c-logs or --clear-logs to clear all logs")
                 print("  -r or --reset to reset everything (habits, logs, and streaks)")
+                print("  -p or --plot to visualize habit streaks")
                 print("  --dev to make core files writable for development")
                 print("  --lock to make core files read-only again")
                 handle_program_exit(1)

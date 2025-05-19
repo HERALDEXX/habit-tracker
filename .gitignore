@@ -1,0 +1,18 @@
+# Virtual Environment
+venv/
+env/
+.env/
+.venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Archive files
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+*.iso

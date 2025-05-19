@@ -1,7 +1,7 @@
 # Habit Tracker Engine Package
 # This package contains the core functionality for the Habit Tracker application.
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 __author__ = "Herald Inyang"
 __description__ = "A simple but powerful habit tracking application"
 __app_name__ = "HERALDEXX HABIT TRACKER"
@@ -19,5 +19,6 @@ __features__ = [
 ]
 __credits__ = [
     "Herald Inyang (Lead Developer)",
-    "Early Founders Academy (Project Supervision)"
+    "EarlyFounders Academy (Training Institution)",
+    "Adesua Ayomitan (Project Supervisor)"
 ]

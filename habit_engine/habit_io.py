@@ -3,9 +3,11 @@
 import json
 import os
 import stat
+import shutil
 
 # File paths
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
+PLOTS_DIR = os.path.join(DATA_DIR, 'plots')
 HABITS_FILE = os.path.join(DATA_DIR, 'habits.json')
 LOGS_FILE = os.path.join(DATA_DIR, 'logs.json')
 STREAKS_FILE = os.path.join(DATA_DIR, 'streaks.json')
@@ -165,4 +167,53 @@ def save_daily_logs(logs, streaks):
         return True
     except Exception as e:
         print(f"Error saving logs: {e}")
+        return False
+
+def reset_app_data():
+    """Reset all application data including habits, logs, streaks, and plots."""
+    try:
+        # Reset JSON files
+        if os.path.exists(HABITS_FILE):
+            with open(HABITS_FILE, 'w') as file:
+                json.dump([], file)
+        
+        if os.path.exists(LOGS_FILE):
+            with open(LOGS_FILE, 'w') as file:
+                json.dump([], file)
+                
+        if os.path.exists(STREAKS_FILE):
+            with open(STREAKS_FILE, 'w') as file:
+                json.dump({}, file)
+        
+        # Clear plots directory
+        if os.path.exists(PLOTS_DIR):
+            shutil.rmtree(PLOTS_DIR)
+            os.makedirs(PLOTS_DIR, exist_ok=True)
+            
+        return True
+    except Exception as e:
+        print(f"Error resetting application data: {e}")
+        return False
+
+def clear_tracking_data():
+    """Clear all tracking data (logs, streaks, and plots) but keep habits."""
+    try:
+        # Clear logs
+        if os.path.exists(LOGS_FILE):
+            with open(LOGS_FILE, 'w') as file:
+                json.dump([], file)
+                
+        # Clear streaks
+        if os.path.exists(STREAKS_FILE):
+            with open(STREAKS_FILE, 'w') as file:
+                json.dump({}, file)
+        
+        # Clear plots directory
+        if os.path.exists(PLOTS_DIR):
+            shutil.rmtree(PLOTS_DIR)
+            os.makedirs(PLOTS_DIR, exist_ok=True)
+            
+        return True
+    except Exception as e:
+        print(f"Error clearing tracking data: {e}")
         return False

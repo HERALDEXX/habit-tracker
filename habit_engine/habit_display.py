@@ -1,4 +1,5 @@
-# Handles the display of habits and user interface elements for the Habit Tracker application.
+# Handles the basic display of habits and user interface elements.
+# For advanced visualization features, see habit_visualization.py
 
 def display_logs(logs, habit_streaks):
     """Display all logged entries with streaks."""
