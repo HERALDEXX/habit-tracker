@@ -1,125 +1,82 @@
-# HERALDEXX Habit Tracker v1.0.0
+# HERALDEXX Habit Tracker v2.0.0
 
-A simple yet powerful command-line habit tracking application that helps you build and maintain daily habits.
+A modular Python application for tracking daily habits and maintaining streaks.
 
 ## Features
 
-### 1. Dynamic Habit Setup
+- Track 2-10 daily habits
+- Maintain streak counts for completed habits
+- View habit completion logs
+- Clear logs or reset all data
+- Graceful error handling and data validation
+- JSON-based persistent storage
 
-- Choose your own number of habits to track (minimum 2, maximum 10)
-- Each habit is saved and persists between sessions
-- Ability to reset and create new habits
-- Completely flexible - you decide how many habits fit your lifestyle
+## Project Structure
 
-### 2. Daily Check-ins
-
-- Log your daily habit completion status
-- Full word responses accepted: "yes"/"no" or quick "y"/"n"
-- Automatic date tracking
-- Visual feedback with checkmarks (✓) and crosses (✗)
-
-### 3. Streak Tracking
-
-- Automatically tracks streaks for each habit
-- Shows streak counts with fire emoji (🔥)
-- Streaks reset when habits are missed or days are skipped
-- Persistent streak storage
-- Accurately tracks consecutive days only
-
-### 4. Log Management
-
-- View complete history of habit tracking
-- Clear all logs when needed
-- Logs are grouped by date for easy reading
-- Clean reset functionality
-
-### 5. Command Line Options
-
-```bash
--v-logs, --view-logs    View all tracking history
--c-logs, --clear-logs   Clear all logs and reset streaks
--r, --reset            Reset everything (habits, logs, and streaks)
+```
+habit_tracker_2.0/
+├── main.py               # Main entry point
+├── data/                 # Data storage directory
+│   ├── habits.json      # Stores habit definitions
+│   ├── logs.json        # Stores daily completion logs
+│   └── streaks.json     # Stores habit streaks
+└── habit_engine/        # Core functionality package
+    ├── __init__.py      # Package initialization
+    ├── habit_setup.py   # Initial setup functionality
+    ├── habit_io.py      # File I/O operations
+    ├── habit_logic.py   # Core habit tracking logic
+    └── habit_display.py # Display and UI functions
 ```
 
 ## Usage
 
-### 1. First Time Setup
+Run the program:
 
-1. Run the program for the first time
-2. Choose how many habits you want to track (2-10)
-3. Input your chosen number of habits
-4. Each habit must be unique
+```bash
+python main.py
+```
 
-### 2. Daily Check-in
+Command line options:
 
-1. Run the program without any arguments
-2. Answer with "yes"/"no" (or "y"/"n") for each habit
-3. View your progress immediately after check-in
+- `-i` or `--info`: Display detailed application information
+- `-v-logs` or `--view-logs`: View habit logs
+- `-c-logs` or `--clear-logs`: Clear all logs
+- `-r` or `--reset`: Reset everything (habits, logs, and streaks)
+- `--dev`: Make core files writable for development/updates
+- `--lock`: Make core files read-only after development
 
-### 3. View Progress
+## Development Workflow
 
-1. Use `-v-logs` to see your complete tracking history
-2. Check your current streaks for each habit
-3. Monitor your consistency over time
+When making changes to the codebase:
 
-### 4. Reset Options
+1. Unlock files for development:
 
-- Clear just the logs with `-c-logs`
-- Complete reset with `-r` to start fresh
-  - Clears all habits, logs, and streaks
-  - Run the program again without arguments to set up new habits
+```bash
+python main.py --dev
+```
 
-## Technical Details
+2. Make your changes to the code
 
-- Written in Python
-- Uses file-based storage within the script itself
-- No external dependencies required
-- Date-aware streak calculation
-- Automatic data persistence
-- Clean separation of concerns in code structure
+3. Lock files before committing:
 
-## Notes
+```bash
+python main.py --lock
+```
 
-> **Important:**
->
-> - The application stores all data within the script file
-> - Make sure you have write permissions in the application directory
-> - Recommended to keep backup copies of your tracking data
-> - Reset functionality (`-r`) provides a clean slate without prompting for new data
-> - Run the program without arguments after reset to set up new habits
+4. Push your changes:
 
+```bash
+git add .
+git commit -m "Your commit message"
+git push
+```
 
-## Potential Future Enhancements
+This ensures that files are always pushed in their protected (read-only) state.
 
-### 1. Data Management
+## Data Storage
 
-- Export logs to CSV/Excel
-- Backup and restore functionality
-- Multiple user support
+All data is stored in JSON format in the `data/` directory:
 
-### 2. Analytics
-
-- Success rate calculations
-- Weekly/monthly reports
-- Habit completion trends
-- Best and worst performing habits
-
-### 3. User Experience
-
-- GUI interface
-- Mobile app version
-- Web interface
-- Reminder system
-
-### 4. Social Features
-
-- Share progress
-- Compete with friends
-- Community challenges
-
-### 5. Customization
-
-- Dynamic habit counts
-- Custom categories
-- Priority levels
-- Different tracking frequencies (daily/weekly/monthly)
+- `habits.json`: List of configured habits
+- `logs.json`: List of daily habit completion logs
+- `streaks.json`: Dictionary of current streaks for each habit
