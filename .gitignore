@@ -16,3 +16,8 @@ __pycache__/
 *.rar
 *.7z
 *.iso
+
+# PyInstaller files
+*.spec
+build/
+dist/

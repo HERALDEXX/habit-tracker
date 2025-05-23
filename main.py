@@ -1,7 +1,10 @@
 # Contains the main entry point for the Habit Tracker application.
-
+import sys
+from colorama import init, Fore, Style
+import time
+import msvcrt  # For Windows console handling
 # Import all necessary functions from modules
-from habit_engine.__init__ import __version__, __app_name__
+from habit_engine.__init__ import __version__, __app_name__, __copyright__
 from habit_engine.habit_setup import setup_habits
 from habit_engine.habit_io import (
     load_habits,
@@ -24,18 +27,60 @@ from habit_engine.habit_display import (
     display_app_info
 )
 from habit_engine.habit_visualization import visualize_habit_streak
-import sys
+
+init()
 
 def debug_print(message):
-    print(f"[DEBUG]: {message}")
+    print(f"{Fore.LIGHTCYAN_EX}[DEBUG]: {message}{Style.RESET_ALL}")
+
+def wait_for_key():
+    """Wait for a keypress on Windows."""
+    if sys.platform == 'win32':
+        print(f"\n{Fore.LIGHTWHITE_EX}Press any key to exit...{Style.RESET_ALL}")
+        sys.stdout.flush()
+        while True:
+            if msvcrt.kbhit():
+                msvcrt.getch()  # Get the pressed key
+                break
+            time.sleep(0.1)  # Reduce CPU usage
 
 def handle_program_exit(exit_code=0, message=None):
     """Handle program exit with optional message."""
-    if message:
-        print(message)
-    sys.exit(exit_code)
+    try:
+        # Show message first if provided
+        if message:
+            if exit_code == 0:
+                print(f"{Fore.LIGHTGREEN_EX}{message}{Style.RESET_ALL}")
+            else:
+                print(f"{Fore.LIGHTRED_EX}{message}{Style.RESET_ALL}")
+        
+        # For all platforms when running as a binary
+        if getattr(sys, 'frozen', False):
+            # Ensure all output is flushed
+            sys.stdout.flush()
+            sys.stderr.flush()
+            
+            if sys.platform == 'win32':
+                wait_for_key()
+            else:
+                print(f"\n{Fore.LIGHTWHITE_EX}Press Enter to exit...{Style.RESET_ALL}")
+                sys.stdout.flush()
+                try:
+                    input()
+                except (EOFError, KeyboardInterrupt):
+                    pass
+        
+        # Final cleanup
+        print(Style.RESET_ALL, end='')
+        sys.stdout.flush()
+        sys.exit(exit_code)
+    except Exception:
+        # Last resort: add delay before exit
+        time.sleep(2)
+        sys.exit(exit_code)
 
 debug_print(f"{__app_name__} v{__version__} is running...")
+debug_print(f"{__copyright__}")
 
 if __name__ == "__main__": 
     try:
@@ -79,40 +124,44 @@ if __name__ == "__main__":
             elif sys.argv[1] in ['-p', '--plot']:
                 if not habits:
                     handle_program_exit(1, "\nNo habits found. Please set up habits first.")
-                print("\nAvailable habits:")
+                print(f"\n{Fore.LIGHTWHITE_EX}Available habits:{Style.RESET_ALL}")
                 for i, habit in enumerate(habits, 1):
-                    print(f"{i}. {habit}")
+                    print(f"{Fore.LIGHTMAGENTA_EX}{i}. {Fore.LIGHTBLUE_EX}{habit}{Style.RESET_ALL}")
                 try:
-                    choice = input("\nEnter the number of the habit to visualize: ").strip()
+                    print(f"\n{Fore.LIGHTGREEN_EX}Enter the number of the habit to visualize: {Style.RESET_ALL}", end='')
+                    choice = input().strip()
                     idx = int(choice) - 1
                     if 0 <= idx < len(habits):
-                        if visualize_habit_streak(daily_logs, habits[idx]):
-                            handle_program_exit(message="\nVisualization created successfully!")
+                        plot_filename = visualize_habit_streak(daily_logs, habits[idx])
+                        if plot_filename:
+                            message = f"\nVisualization created successfully! Check your data/plots/ directory for {plot_filename}"
+                            handle_program_exit(0, message)
+                        else:
+                            handle_program_exit(1)
                     else:
                         handle_program_exit(1, "\nInvalid habit number selected.")
                 except (ValueError, IndexError):
                     handle_program_exit(1, "\nInvalid input. Please enter a valid number.")
-                handle_program_exit(1, "\nFailed to create visualization.")
             else:
-                print("Invalid option. Use:")
-                print("  -i or --info to display application information")
-                print("  -v-logs or --view-logs to view logs")
-                print("  -c-logs or --clear-logs to clear all logs")
-                print("  -r or --reset to reset everything (habits, logs, and streaks)")
-                print("  -p or --plot to visualize habit streaks")
-                print("  --dev to make core files writable for development")
-                print("  --lock to make core files read-only again")
+                print(f"{Fore.LIGHTWHITE_EX}Invalid option. Use:{Style.RESET_ALL}")
+                print(f"  {Fore.LIGHTMAGENTA_EX}-i{Style.RESET_ALL} or {Fore.LIGHTMAGENTA_EX}--info{Style.RESET_ALL} to display application information")
+                print(f"  {Fore.LIGHTMAGENTA_EX}-v-logs{Style.RESET_ALL} or {Fore.LIGHTMAGENTA_EX}--view-logs{Style.RESET_ALL} to view logs")
+                print(f"  {Fore.LIGHTMAGENTA_EX}-c-logs{Style.RESET_ALL} or {Fore.LIGHTMAGENTA_EX}--clear-logs{Style.RESET_ALL} to clear all logs")
+                print(f"  {Fore.LIGHTMAGENTA_EX}-r{Style.RESET_ALL} or {Fore.LIGHTMAGENTA_EX}--reset{Style.RESET_ALL} to reset everything (habits, logs, and streaks)")
+                print(f"  {Fore.LIGHTMAGENTA_EX}-p{Style.RESET_ALL} or {Fore.LIGHTMAGENTA_EX}--plot{Style.RESET_ALL} to visualize habit streaks")
+                print(f"  {Fore.LIGHTMAGENTA_EX}--dev{Style.RESET_ALL} to make core files writable for development")
+                print(f"  {Fore.LIGHTMAGENTA_EX}--lock{Style.RESET_ALL} to make core files read-only again")
                 handle_program_exit(1)
         
         # Regular program flow - check if habits need to be set up
         if not habits:
-            print("No habits found! Let's set up your daily habits first.")
+            print(f"{Fore.LIGHTCYAN_EX}No habits found! Let's set up your daily habits first.{Style.RESET_ALL}")
             habits = setup_habits()
             if not habits:  # If setup was cancelled or failed
                 handle_program_exit(1, "\nError: Failed to set up habits")
                 
             if save_habits(habits):
-                print("\nHabits saved successfully!")
+                print(f"\n{Fore.LIGHTGREEN_EX}Habits saved successfully!{Style.RESET_ALL}")
             else:
                 handle_program_exit(1, "\nError: Failed to save habits")
 
@@ -125,7 +174,7 @@ if __name__ == "__main__":
         update_streaks(daily_logs, habits, habit_streaks)
         
         if save_daily_logs(daily_logs, habit_streaks):
-            print("\nToday's logs have been recorded successfully!")
+            print(f"\n{Fore.LIGHTGREEN_EX}Today's logs have been recorded successfully!{Style.RESET_ALL}")
             display_logs(daily_logs, habit_streaks)
         else:
             handle_program_exit(1, "\nError: Failed to save logs")

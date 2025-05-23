@@ -5,8 +5,17 @@ import os
 import stat
 import shutil
 
+import sys
+from colorama import Fore, Style
+
+# Detect base path depending on whether the app is frozen (compiled with PyInstaller) or not
+if getattr(sys, 'frozen', False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 # File paths
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
+DATA_DIR = os.path.join(BASE_DIR, 'data')
 PLOTS_DIR = os.path.join(DATA_DIR, 'plots')
 HABITS_FILE = os.path.join(DATA_DIR, 'habits.json')
 LOGS_FILE = os.path.join(DATA_DIR, 'logs.json')
@@ -38,11 +47,11 @@ def make_files_readonly():
                 os.chmod(file_path, readonly_permissions)
                 protected_files.append(os.path.basename(file_path))
         except Exception as e:
-            print(f"Error setting read-only for {os.path.basename(file_path)}: {e}")
+            print(f"{Fore.LIGHTRED_EX}Error setting read-only for {os.path.basename(file_path)}: {e}{Style.RESET_ALL}")
             success = False
     
     if protected_files:
-        print(f"Protected {len(protected_files)} core files.")
+        print(f"{Fore.LIGHTGREEN_EX}Protected {len(protected_files)} core files.{Style.RESET_ALL}")
     return success
 
 def make_files_writable():
@@ -60,11 +69,11 @@ def make_files_writable():
                 os.chmod(file_path, writable_permissions)
                 writable_files.append(os.path.basename(file_path))
         except Exception as e:
-            print(f"Error setting writable for {os.path.basename(file_path)}: {e}")
+            print(f"{Fore.LIGHTRED_EX}Error setting writable for {os.path.basename(file_path)}: {e}{Style.RESET_ALL}")
             success = False
     
     if writable_files:
-        print(f"Unlocked {len(writable_files)} core files for development.")
+        print(f"{Fore.LIGHTGREEN_EX}Unlocked {len(writable_files)} core files for development.{Style.RESET_ALL}")
     return success
 
 def initialize_data_files():
@@ -72,6 +81,7 @@ def initialize_data_files():
     try:
         # Ensure data directory exists
         os.makedirs(DATA_DIR, exist_ok=True)
+        os.makedirs(PLOTS_DIR, exist_ok=True)
         
         # Initialize habits.json if it doesn't exist
         if not os.path.exists(HABITS_FILE):
@@ -93,7 +103,7 @@ def initialize_data_files():
                 
         return True
     except Exception as e:
-        print(f"Error initializing data files: {e}")
+        print(f"{Fore.LIGHTRED_EX}Error initializing data files: {e}{Style.RESET_ALL}")
         return False
 
 def load_habits():
@@ -104,7 +114,7 @@ def load_habits():
                 habits = json.load(file)
                 return [str(habit) for habit in habits] if isinstance(habits, list) else []
     except Exception as e:
-        print(f"Error loading habits: {e}")
+        print(f"{Fore.LIGHTRED_EX}Error loading habits: {e}{Style.RESET_ALL}")
     return []
 
 def save_habits(habits_list):
@@ -112,14 +122,14 @@ def save_habits(habits_list):
     try:
         # Validate habits list
         if not isinstance(habits_list, list):
-            print("Error: Invalid habits data format")
+            print(f"{Fore.LIGHTRED_EX}Error: Invalid habits data format{Style.RESET_ALL}")
             return False
             
         with open(HABITS_FILE, 'w') as file:
             json.dump(habits_list, file, indent=2)
         return True
     except Exception as e:
-        print(f"Error saving habits: {e}")
+        print(f"{Fore.LIGHTRED_EX}Error saving habits: {e}{Style.RESET_ALL}")
         return False
 
 def load_habit_streaks():
@@ -131,7 +141,7 @@ def load_habit_streaks():
                 # Ensure all values are integers
                 return {str(k): int(v) for k, v in streaks.items()} if isinstance(streaks, dict) else {}
     except Exception as e:
-        print(f"Error loading streaks: {e}")
+        print(f"{Fore.LIGHTRED_EX}Error loading streaks: {e}{Style.RESET_ALL}")
     return {}
 
 def load_daily_logs():
@@ -149,7 +159,7 @@ def load_daily_logs():
                             valid_logs.append([str(habit), str(date), bool(completed)])
                     return valid_logs
     except Exception as e:
-        print(f"Error loading logs: {e}")
+        print(f"{Fore.LIGHTRED_EX}Error loading logs: {e}{Style.RESET_ALL}")
     return []
 
 def save_daily_logs(logs, streaks):
@@ -157,7 +167,7 @@ def save_daily_logs(logs, streaks):
     try:
         # Validate logs and streaks
         if not isinstance(logs, list) or not isinstance(streaks, dict):
-            print("Error: Invalid data format")
+            print(f"{Fore.LIGHTRED_EX}Error: Invalid data format{Style.RESET_ALL}")
             return False
             
         with open(LOGS_FILE, 'w') as file:
@@ -166,7 +176,7 @@ def save_daily_logs(logs, streaks):
             json.dump(streaks, file, indent=2)
         return True
     except Exception as e:
-        print(f"Error saving logs: {e}")
+        print(f"{Fore.LIGHTRED_EX}Error saving logs: {e}{Style.RESET_ALL}")
         return False
 
 def reset_app_data():
@@ -192,7 +202,7 @@ def reset_app_data():
             
         return True
     except Exception as e:
-        print(f"Error resetting application data: {e}")
+        print(f"{Fore.LIGHTRED_EX}Error resetting application data: {e}{Style.RESET_ALL}")
         return False
 
 def clear_tracking_data():
@@ -215,5 +225,5 @@ def clear_tracking_data():
             
         return True
     except Exception as e:
-        print(f"Error clearing tracking data: {e}")
+        print(f"{Fore.LIGHTRED_EX}Error clearing tracking data: {e}{Style.RESET_ALL}")
         return False
