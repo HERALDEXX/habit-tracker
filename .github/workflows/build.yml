@@ -6,6 +6,9 @@ on:
       - "v*" # Trigger on version tags
   workflow_dispatch: # Allow manual triggering
 
+env:
+  APP_VERSION: ${{ github.ref_name }}
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -23,10 +26,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set version
+        run: |
+          if [[ -z "${{ env.APP_VERSION }}" ]]; then
+            echo "APP_VERSION=v2.2.0" >> $GITHUB_ENV
+          fi
+        shell: bash
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12" # Using stable Python version
+          python-version: "3.12"
 
       - name: Install system dependencies (Linux)
         if: matrix.platform_name == 'linux'
@@ -51,7 +61,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install pyinstaller
+          python -m pip install "setuptools<81" pyinstaller
           if [ -f "requirements.txt" ]; then
             python -m pip install -r requirements.txt
           else
@@ -68,38 +78,46 @@ jobs:
 
       - name: Build executable (Windows)
         if: matrix.platform_name == 'windows'
-        run: pyinstaller --clean --onefile --name "heraldexx-habit-tracker-v2.1.1" --hidden-import matplotlib --hidden-import tkinter --hidden-import PIL main.py
+        run: pyinstaller --clean --onefile --windowed --icon assets/icon.ico --name "heraldexx-habit-tracker-${{ env.APP_VERSION }}" --add-data "assets;assets" --hidden-import matplotlib --hidden-import matplotlib.backends.backend_agg --hidden-import tkinter --hidden-import PIL --hidden-import customtkinter --hidden-import darkdetect --hidden-import PIL._tkinter_finder --collect-submodules numpy main.py
         shell: cmd
 
       - name: Build executable (Unix)
         if: matrix.platform_name != 'windows'
         run: |
           pyinstaller --clean --onefile \
-            --name "heraldexx-habit-tracker-v2.1.1-${{ matrix.platform_name }}" \
+            --windowed \
+            --icon assets/icon.png \
+            --name "heraldexx-habit-tracker-${{ env.APP_VERSION }}-${{ matrix.platform_name }}" \
+            --add-data "assets:assets" \
             --hidden-import matplotlib \
+            --hidden-import matplotlib.backends.backend_agg \
             --hidden-import tkinter \
             --hidden-import PIL \
+            --hidden-import customtkinter \
+            --hidden-import darkdetect \
+            --hidden-import PIL._tkinter_finder \
+            --collect-submodules numpy \
             main.py
         shell: bash
 
       - name: Set executable permissions (Unix)
         if: matrix.platform_name != 'windows'
-        run: chmod +x dist/heraldexx-habit-tracker-v2.1.1-${{ matrix.platform_name }}
+        run: chmod +x dist/heraldexx-habit-tracker-${{ env.APP_VERSION }}-${{ matrix.platform_name }}
         shell: bash
 
       - name: Upload artifact (Windows)
         if: matrix.platform_name == 'windows'
         uses: actions/upload-artifact@v4
         with:
-          name: heraldexx-habit-tracker-v2.1.1-windows
-          path: dist/heraldexx-habit-tracker-v2.1.1.exe
+          name: heraldexx-habit-tracker-${{ env.APP_VERSION }}-windows
+          path: dist/heraldexx-habit-tracker-${{ env.APP_VERSION }}.exe
 
       - name: Upload artifact (Unix)
         if: matrix.platform_name != 'windows'
         uses: actions/upload-artifact@v4
         with:
-          name: heraldexx-habit-tracker-v2.1.1-${{ matrix.platform_name }}
-          path: dist/heraldexx-habit-tracker-v2.1.1-${{ matrix.platform_name }}
+          name: heraldexx-habit-tracker-${{ env.APP_VERSION }}-${{ matrix.platform_name }}
+          path: dist/heraldexx-habit-tracker-${{ env.APP_VERSION }}-${{ matrix.platform_name }}
 
   release:
     needs: build
@@ -111,25 +129,25 @@ jobs:
       - name: Download Windows artifact
         uses: actions/download-artifact@v4
         with:
-          name: heraldexx-habit-tracker-v2.1.1-windows
+          name: heraldexx-habit-tracker-${{ env.APP_VERSION }}-windows
           path: dist
 
       - name: Download Linux artifact
         uses: actions/download-artifact@v4
         with:
-          name: heraldexx-habit-tracker-v2.1.1-linux
+          name: heraldexx-habit-tracker-${{ env.APP_VERSION }}-linux
           path: dist
 
       - name: Download macOS artifact
         uses: actions/download-artifact@v4
         with:
-          name: heraldexx-habit-tracker-v2.1.1-macos
+          name: heraldexx-habit-tracker-${{ env.APP_VERSION }}-macos
           path: dist
 
       - name: Prepare release files
         run: |
           cd dist
-          chmod +x heraldexx-habit-tracker-v2.1.1-linux heraldexx-habit-tracker-v2.1.1-macos
+          chmod +x heraldexx-habit-tracker-${{ env.APP_VERSION }}-linux heraldexx-habit-tracker-${{ env.APP_VERSION }}-macos
         shell: bash
 
       - name: Create Release

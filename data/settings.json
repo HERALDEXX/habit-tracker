@@ -1,0 +1,9 @@
+{
+  "appearance_mode": "System",
+  "autosave_interval": 30,
+  "daily_reminder_enabled": 0,
+  "reminder_time": "09:00",
+  "chart_style": "Line Plot",
+  "show_streak_annotations": true,
+  "chart_date_range": "Last 30 Days"
+}

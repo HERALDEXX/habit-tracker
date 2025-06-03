@@ -1,2 +1,16 @@
+# Core dependencies - required for running the application
 matplotlib>=3.8.0
-colorama==0.4.6
+colorama>=0.4.6
+customtkinter>=5.2.0
+pillow>=10.0.0
+darkdetect>=0.8.0
+
+# IMPORTANT: Platform-specific exceptions for macOS and Linux
+# --------------------------------------
+# 1. tkinter - NOT INSTALLABLE VIA PIP 
+#    - Linux:   sudo apt-get install python3-tk
+#    - macOS:   brew install python-tk (if using Homebrew)
+
+# The above platform-specific packages must be installed through your system's
+# package manager before running pip install -r requirements.txt
+

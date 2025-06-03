@@ -7,17 +7,48 @@ env/
 # Python cache files
 __pycache__/
 *.py[cod]
+*$py.class
 .pytest_cache/
 
-# Archive files
-*.zip
-*.tar
-*.gz
-*.rar
-*.7z
-*.iso
-
-# PyInstaller files
-*.spec
-build/
+# Distribution / packaging
 dist/
+build/
+*.egg-info/
+*.egg
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.project
+.pydevproject
+
+# Environment variables
+.env
+.env.*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Testing
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Project specific
+data/plots/*
+!data/plots/.gitkeep
+
+# Keep assets directory
+!assets/
+!assets/*

@@ -1,16 +1,22 @@
-# HERALDEXX Habit Tracker v2.1.1
+# HERALDEXX Habit Tracker v2.2.0
 
-A modular Python application for tracking daily habits and maintaining streaks.
+A modern Python application for tracking daily habits and maintaining streaks, featuring both CLI and GUI interfaces.
 
 ## What's New
 
-**v2.1.0 → v2.1.1**
+**v2.1.1 → v2.2.0**
 
-- Minor bug fixes
-- CI builds for macOS and Linux
-- Single-executable distribution for all platforms
+> - Added modern GUI interface with customtkinter
+> - Dark/Light/System theme support
+> - Interactive habit setup wizard
+> - Enhanced visualization and statistics
+> - Real-time streak tracking
+> - Updated storage location to user configuration directory for executables and clarified source code data path
+> - Added in-app daily reminders and notifications
+> - Autosave functionality
+> - Visualization/Chart customization for better user experience
 
-[See All Changes](https://github.com/HERALDEXX/habit-tracker/compare/v2.1.0...v2.1.1)
+[See All Changes](https://github.com/HERALDEXX/habit-tracker/compare/v2.1.1...v2.2.0)
 
 ## ⚡ Quick Start
 
@@ -21,31 +27,32 @@ A modular Python application for tracking daily habits and maintaining streaks.
 
 #### Windows
 
-1. Download `heraldexx-habit-tracker-v2.1.1.exe` from [Release v2.1.1](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.1.1)
+1. Download `heraldexx-habit-tracker-v2.2.0.exe` from [Release v2.2.0](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.2.0)
 2. Double-click to run
-3. Follow the prompts to set up your habits
+3. Follow the interactive setup wizard
+   > ⚠️ Data is stored in `C:\Users\<username>\.heraldexx-habit-tracker\data`. Ensure this directory is preserved for your logs, streaks, and visualizations.
 
 #### Linux
 
-1. Download `heraldexx-habit-tracker-v2.1.1-linux` from [Release v2.1.1](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.1.1)
+1. Download `heraldexx-habit-tracker-v2.2.0-linux` from [Release v2.2.0](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.2.0)
 2. Open terminal in download location
-3. Run: `chmod +x heraldexx-habit-tracker-v2.1.1-linux`
-4. Run: `./heraldexx-habit-tracker-v2.1.1-linux`
-5. Follow the prompts to set up your habits
+3. Run: `chmod +x heraldexx-habit-tracker-v2.2.0-linux`
+4. Run: `./heraldexx-habit-tracker-v2.2.0-linux`
+5. Follow the interactive setup wizard
+   > ⚠️ Data is stored in `~/.heraldexx-habit-tracker/data`. Ensure this directory is preserved for your logs, streaks, and visualizations.
 
 #### macOS
 
-1. Download `heraldexx-habit-tracker-v2.1.1-macos` from [Release v2.1.1](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.1.1)
+1. Download `heraldexx-habit-tracker-v2.2.0-macos` from [Release v2.2.0](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.2.0)
 2. Open terminal in download location
-3. Run: `chmod +x heraldexx-habit-tracker-v2.1.1-macos`
-4. Run: `./heraldexx-habit-tracker-v2.1.1-macos`
-5. Follow the prompts to set up your habits
-
-> ⚠️ Keep the generated `data/` folder next to the executable for your logs, streaks, and visualizations to be saved.
+3. Run: `chmod +x heraldexx-habit-tracker-v2.2.0-macos`
+4. Run: `./heraldexx-habit-tracker-v2.2.0-macos`
+5. Follow the interactive setup wizard
+   > ⚠️ Data is stored in `~/.heraldexx-habit-tracker/data`. Ensure this directory is preserved for your logs, streaks, and visualizations.
 
 ### 👨‍💻 For Developers (Cross-Platform)
 
-1. Download the **Cross-Platform Source Code (zip)** from [Releases Page](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.1.1) (do **not** download the `.exe`)
+1. Download the **Cross-Platform Source Code (zip)** from [Releases Page](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.2.0) (do **not** download the **executables**)
 2. Extract the zip file
 3. Navigate to and open your terminal in the extracted folder
 4. Install dependencies:
@@ -57,130 +64,229 @@ pip install -r requirements.txt
 5. Run the program:
 
 ```bash
-python main.py
+python main.py        # Starts in GUI mode
+python main.py --cli  # Starts in CLI mode
 ```
+
+> ⚠️ Data is stored in the `data/` directory relative to `main.py`. Ensure this directory is preserved for your logs, streaks, and visualizations.
 
 ## Features
 
+### GUI Features
+
+- Modern, customizable interface
+- Dark/Light/System theme support
+- Interactive habit setup wizard
+- Real-time habit tracking
+- Visual streak indicators
+- Detailed log history view
+- Interactive statistics and visualizations
+- One-click theme switching
+- Intuitive navigation
+- Autosave functionality
+- In-app daily reminders and notifications
+- Visualization/Chart customization
+
+### CLI Features
+
 - Track 2-10 daily habits
-- Maintain streak counts for completed habits
+- Maintain streak counts
 - View habit completion logs
-- Clear logs or reset all data
-- Graceful error handling and data validation
+- Clear logs or reset data
+- Command-line arguments support
+- Cross-platform compatibility
 - JSON-based persistent storage
-- Visual streak analysis with matplotlib
+- Visualization plot generation
+- View MIT license
 
 ## 📁 Project Structure
 
 ```
-├── main.py           # Main entry point
-├── requirements.txt  # Python dependencies
-├── .github/         # GitHub specific configurations
-│   └── workflows/   # GitHub Actions CI/CD workflows
-│       └── build.yml # Cross-platform build configuration
-├── data/            # Data storage directory
-│   ├── habits.json  # Stores habit definitions
-│   ├── logs.json    # Stores daily completion logs
-│   ├── streaks.json # Stores habit streaks
-│   └── plots/       # Generated visualization plots
-└── habit_engine/    # Core functionality package
-    ├── __init__.py             # Package initialization
-    ├── habit_setup.py          # Initial setup functionality
-    ├── habit_io.py            # File I/O operations
-    ├── habit_logic.py         # Core habit tracking logic
-    ├── habit_display.py       # Display and UI functions
-    └── habit_visualization.py  # Data visualization
+├── main.py                     # Main entry point with both GUI and CLI modes
+├── requirements.txt            # Python package dependencies
+├── README.md                   # Project documentation
+├── .github/                    # GitHub specific configurations
+│   └── workflows/             # GitHub Actions CI/CD workflows
+│       └── build.yml          # Cross-platform build configuration
+├── assets/                    # Application assets
+│   ├── icon.ico              # Windows application icon
+│   ├── icon.png              # Main application icon (for macOS/Linux)
+│   └── icons/                # Icon variants for different resolutions
+│       ├── icon_16.png       # 16x16 icon
+│       ├── icon_32.png       # 32x32 icon
+│       ├── icon_64.png       # 64x64 icon
+│       ├── icon_128.png      # 128x128 icon
+│       └── icon_256.png      # 256x256 icon
+├── data/                      # Data storage directory
+│   ├── settings.json         # User-specific settings and preferences
+│   ├── habits.json           # User's configured habits
+│   ├── logs.json            # Daily habit completion records
+│   ├── streaks.json        # Current streak counts for each habit
+│   └── plots/              # Generated visualization plots
+└── habit_engine/             # Core application package
+    ├── __init__.py          # Package metadata and version info
+    ├── gui.py               # Modern GUI interface using customtkinter
+    ├── habit_setup.py       # Initial habit configuration logic
+    ├── habit_io.py          # File I/O and data persistence
+    ├── habit_logic.py       # Core habit tracking algorithms
+    ├── habit_display.py     # CLI display and output formatting
+    └── habit_visualization.py # Data visualization and plotting
 ```
 
-## 🖥️ Command Line Usage
+## 🖥️ Command Line Usage **(For Developers)**
 
-Besides regular interactive mode, you can use these command line options. Replace `EXECUTABLE` with:
+The source code can run in either GUI or CLI mode.
 
-- Windows: `heraldexx-habit-tracker-v2.1.1.exe`
-- Linux: `./heraldexx-habit-tracker-v2.1.1-linux`
-- macOS: `./heraldexx-habit-tracker-v2.1.1-macos`
-- Source code: `python main.py`
+### Getting Help
 
-### Show these command line options and app info
+View all available commands and usage information:
 
 ```bash
-EXECUTABLE -i
+python main.py -h
 ```
 
-### or
+or
 
 ```bash
-EXECUTABLE --info
+python main.py --help
 ```
 
-### View your habit completion logs and streaks
+### Mode Selection
+
+Start in GUI mode (default):
 
 ```bash
-EXECUTABLE -v-logs
+python main.py
 ```
 
-### or
+Force CLI mode:
 
 ```bash
-EXECUTABLE --view-logs
+python main.py --cli
 ```
 
-### Clear all tracking data (logs, streaks, and plots) while keeping habits
+### Information Commands
+
+View help message:
 
 ```bash
-EXECUTABLE -c-logs
+python main.py -h
 ```
 
-### or
+or
 
 ```bash
-EXECUTABLE --clear-logs
+python main.py --help
 ```
 
-### Reset everything (habits, logs, streaks, and plots)
+Show app info and version:
 
 ```bash
-EXECUTABLE -r
+python main.py -i
 ```
 
-### or
+or
 
 ```bash
-EXECUTABLE --reset
+python main.py --info
 ```
 
-### Create visualization plots for your habit streaks
+View MIT license:
 
 ```bash
-EXECUTABLE -p
+python main.py -l
 ```
 
-### or
+or
 
 ```bash
-EXECUTABLE --plot
+python main.py --license
 ```
 
-### Developer mode: Make core files editable
+### Data Management
+
+View habit completion logs and streaks:
 
 ```bash
-EXECUTABLE --dev
+python main.py -v-logs
 ```
 
-### Lock core files (after development)
+or
 
 ```bash
-EXECUTABLE --lock
+python main.py --view-logs
 ```
+
+Clear tracking data while keeping habits:
+
+```bash
+python main.py -c-logs
+```
+
+or
+
+```bash
+python main.py --clear-logs
+```
+
+Reset everything (habits, logs, streaks, and plots):
+
+```bash
+python main.py -r
+```
+
+or
+
+```bash
+python main.py --reset
+```
+
+### Visualization
+
+Create habit streak visualizations:
+
+```bash
+python main.py -p
+```
+
+or
+
+```bash
+python main.py --plot
+```
+
+### Development Options
+
+Developer mode (make core files editable):
+
+```bash
+python main.py --dev
+```
+
+Lock core files (after development):
+
+```bash
+python main.py --lock
+```
+
+### Notes
+
+> - For executables, data is stored in `~/.heraldexx-habit-tracker/data` (Linux/macOS) or `C:\Users\<username>\.heraldexx-habit-tracker\data` (Windows).
+> - For source code, data is stored in `data/` relative to `main.py`.
+> - Visualizations are saved in the `plots/` subdirectory of the data directory.
+> - Use GUI mode for the best interactive experience
+> - CLI mode is ideal for automation and scripting
 
 > 📝 **Note:** For Linux and macOS users, you may need to make the file executable first:
 >
 > ```bash
 > # For Linux
-> chmod +x heraldexx-habit-tracker-v2.1.1-linux
+> chmod +x heraldexx-habit-tracker-v2.2.0-linux
+> ```
 >
+> ```bash
 > # For macOS
-> chmod +x heraldexx-habit-tracker-v2.1.1-macos
+> chmod +x heraldexx-habit-tracker-v2.2.0-macos
 > ```
 
 ## 🔒 Development Workflow
@@ -189,26 +295,16 @@ When making changes to the codebase:
 
 1. Unlock files for development:
 
-### Windows
 ```bash
 python main.py --dev
-```
-### Linux/macOS
-```bash
-./main.py --dev
 ```
 
 2. Make your changes to the code
 
 3. Lock files before committing:
 
-### Windows
 ```bash
 python main.py --lock
-```
-### Linux/macOS
-```bash
-./main.py --lock
 ```
 
 4. Push your changes:
@@ -223,9 +319,33 @@ This ensures that files are always pushed in their protected (read-only) state.
 
 ## 💾 Data Storage
 
-All data is stored in JSON format in the `data/` directory:
+> All data is stored in JSON format in the data directory:
+>
+> - For executables: `~/.heraldexx-habit-tracker/data` (Linux/macOS) or `C:\Users\<username>\.heraldexx-habit-tracker\data` (Windows)
+> - For source code: `data/` directory relative to `main.py`
+>
+> The data directory contains:
+>
+> - `settings.json`: User-specific settings and preferences
+> - `habits.json`: List of configured habits
+> - `logs.json`: List of daily habit completion logs
+> - `streaks.json`: Dictionary of current streaks for each habit
+> - `plots/`: Folder containing auto-generated visualization plots
 
-- `habits.json`: List of configured habits
-- `logs.json`: List of daily habit completion logs
-- `streaks.json`: Dictionary of current streaks for each habit
-- `plots/`: Folder containing auto-generated visualization plots
+## 🎨 Themes
+
+> The application supports three theme modes:
+>
+> - Light Mode: Optimized for bright environments
+> - Dark Mode: Easy on the eyes in low-light conditions
+> - System Mode: Automatically matches your system preferences
+>
+> Switch between themes using the dropdown menu in the sidebar.
+
+## 📄 License
+
+> This project is licensed under the MIT License. You can view the license text:
+>
+> - In GUI mode: Click 'View License' button in the Statistics view
+> - In CLI mode: Use the `-l` or `--license` option
+> - Or read the LICENSE file in the source code project root
