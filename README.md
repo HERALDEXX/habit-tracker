@@ -1,6 +1,50 @@
-# HERALDEXX Habit Tracker v2.2.0
+<h1 align="center" style="display: flex; align-items: center; justify-content: center;">
+  <img src="assets/icon.png" alt="HERALDEXX Habit Tracker Logo" width="64" style="margin-right: 12px;" />
+  HERALDEXX Habit Tracker v2.2.0
+</h1>
 
-A modern Python application for tracking daily habits and maintaining streaks, featuring both CLI and GUI interfaces.
+
+<!-- Badges -->
+<p align="left">
+  <a href="https://github.com/HERALDEXX/habit-tracker/releases/latest">
+    <img src="https://img.shields.io/github/v/release/HERALDEXX/habit-tracker?label=version&style=for-the-badge&color=brightgreen" alt="Latest Release" />
+  </a>
+  <a href="https://github.com/HERALDEXX/habit-tracker/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/HERALDEXX/habit-tracker?color=blue&style=for-the-badge" alt="MIT License" />
+  </a>
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-6A5ACD?style=for-the-badge" alt="Platforms" />
+  <img src="https://img.shields.io/badge/python-3.8%2B-blue?style=for-the-badge" alt="Python Version" />
+  <a href="https://github.com/HERALDEXX/habit-tracker/releases">
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <strong>A modern Python application for tracking daily habits and maintaining streaks, featuring both CLI and GUI interfaces.</strong>
+</p>  
+
+---
+
+## Table of Contents
+
+- [What's New](#whats-new)
+- [⚡ Quick Start](#quick-start)
+  - [🔹 For Regular Users](#for-regular-users)
+    - [Windows](#windows)
+    - [Linux](#linux)
+    - [macos](#macos)
+  - [👨‍💻 For Developers (Cross-Platform)](#for-developers-cross-platform)
+- [Features](#features)
+  - [GUI Features](#gui-features)
+  - [CLI Features](#cli-features)
+- [📁 Project Structure](#project-structure)
+- [🖥️ Command Line Usage For Developers](#command-line-usage-for-developers)
+- [🔒 Development Workflow](#development-workflow)
+- [💾 Data Storage](#data-storage)
+- [🎨 Themes](#themes)
+- [📄 License](#license)
+- [Notes](#notes)
 
 ## What's New
 
@@ -18,16 +62,16 @@ A modern Python application for tracking daily habits and maintaining streaks, f
 
 [See All Changes](https://github.com/HERALDEXX/habit-tracker/compare/v2.1.1...v2.2.0)
 
-## ⚡ Quick Start
+## Quick Start
 
 > 💡 **Note:** This app is written in pure Python and the source code is cross-platform (Windows, macOS, Linux).  
 > ✅ Pre-built binaries are available for **Windows, macOS & Linux**
 
-### 🔹 For Regular Users
+### For Regular Users
 
 #### Windows
 
-1. Download `heraldexx-habit-tracker-v2.2.0.exe` from [Release v2.2.0](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.2.0)
+1. Download `heraldexx-habit-tracker-v2.2.0-windows.exe` from [Release v2.2.0](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.2.0)
 2. Double-click to run
 3. Follow the interactive setup wizard
    > ⚠️ Data is stored in `C:\Users\<username>\.heraldexx-habit-tracker\data`. Ensure this directory is preserved for your logs, streaks, and visualizations.
@@ -50,7 +94,7 @@ A modern Python application for tracking daily habits and maintaining streaks, f
 5. Follow the interactive setup wizard
    > ⚠️ Data is stored in `~/.heraldexx-habit-tracker/data`. Ensure this directory is preserved for your logs, streaks, and visualizations.
 
-### 👨‍💻 For Developers (Cross-Platform)
+### For Developers (Cross-Platform)
 
 1. Download the **Cross-Platform Source Code (zip)** from [Releases Page](https://github.com/HERALDEXX/habit-tracker/releases/tag/v2.2.0) (do **not** download the **executables**)
 2. Extract the zip file
@@ -63,10 +107,17 @@ pip install -r requirements.txt
 
 5. Run the program:
 
-```bash
-python main.py        # Starts in GUI mode
-python main.py --cli  # Starts in CLI mode
-```
+   - Start in GUI mode (default):
+
+   ```bash
+   python main.py
+   ```
+
+   - Start in CLI mode:
+
+   ```bash
+   python main.py --cli
+   ```
 
 > ⚠️ Data is stored in the `data/` directory relative to `main.py`. Ensure this directory is preserved for your logs, streaks, and visualizations.
 
@@ -99,7 +150,7 @@ python main.py --cli  # Starts in CLI mode
 - Visualization plot generation
 - View MIT license
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── main.py                     # Main entry point with both GUI and CLI modes
@@ -133,7 +184,7 @@ python main.py --cli  # Starts in CLI mode
     └── habit_visualization.py # Data visualization and plotting
 ```
 
-## 🖥️ Command Line Usage **(For Developers)**
+## Command Line Usage **(For Developers)**
 
 The source code can run in either GUI or CLI mode.
 
@@ -277,19 +328,19 @@ python main.py --lock
 > - Use GUI mode for the best interactive experience
 > - CLI mode is ideal for automation and scripting
 
-> 📝 **Note:** For Linux and macOS users, you may need to make the file executable first:
->
+> 📝 **Note:** For Linux and macOS users, you may need to make the file executable first **(as already stated in the platform-specific instructions above)**:
+
+> For Linux:
 > ```bash
-> # For Linux
 > chmod +x heraldexx-habit-tracker-v2.2.0-linux
 > ```
->
+
+> For macOS:
 > ```bash
-> # For macOS
 > chmod +x heraldexx-habit-tracker-v2.2.0-macos
 > ```
 
-## 🔒 Development Workflow
+## Development Workflow
 
 When making changes to the codebase:
 
@@ -317,7 +368,7 @@ git push
 
 This ensures that files are always pushed in their protected (read-only) state.
 
-## 💾 Data Storage
+## Data Storage
 
 > All data is stored in JSON format in the data directory:
 >
@@ -332,7 +383,7 @@ This ensures that files are always pushed in their protected (read-only) state.
 > - `streaks.json`: Dictionary of current streaks for each habit
 > - `plots/`: Folder containing auto-generated visualization plots
 
-## 🎨 Themes
+## Themes
 
 > The application supports three theme modes:
 >
@@ -342,7 +393,7 @@ This ensures that files are always pushed in their protected (read-only) state.
 >
 > Switch between themes using the dropdown menu in the sidebar.
 
-## 📄 License
+## License
 
 > This project is licensed under the MIT License. You can view the license text:
 >

@@ -110,7 +110,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: heraldexx-habit-tracker-${{ env.APP_VERSION }}-windows
-          path: dist/heraldexx-habit-tracker-${{ env.APP_VERSION }}.exe
+          path: dist/heraldexx-habit-tracker-${{ env.APP_VERSION }}-windows.exe
 
       - name: Upload artifact (Unix)
         if: matrix.platform_name != 'windows'
