@@ -38,7 +38,7 @@ header img {
   animation: glow 4s infinite ease-in-out;
 }
 
-header h1 {
+header h1 .or-text {
   margin-top: 1rem;
   font-size: 2.5rem;
   text-align: center;
@@ -497,4 +497,22 @@ body.light-theme .source-link {
 
 body.light-theme .source-link:hover {
   background: rgba(157, 0, 255, 0.25);
+}
+
+.typewriter-feed {
+  font-family: 'Orbitron', monospace;
+  color: #00ffe5;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 1.5rem;
+  height: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #00ffe5;
+  animation: blinkCursor 0.75s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #00ffe5; }
 }

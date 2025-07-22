@@ -54,6 +54,41 @@ document.addEventListener("DOMContentLoaded", () => {
     feature.style.transition = "all 0.6s ease-out";
     featureObserver.observe(feature);
   });
+  const feedMessages = [
+    "Mobile version coming soon 📱",
+    "Built for devs. Loved by humans ❤️",
+    "Works offline — your habits, your device 🔒",
+    "Cross-platform magic in one package ✨",
+  ];
+
+  const feedTarget = document.getElementById("announcement-feed");
+  let feedIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function typeFeed() {
+    const currentMessage = feedMessages[feedIndex];
+    if (!isDeleting && charIndex <= currentMessage.length) {
+      feedTarget.textContent = currentMessage.substring(0, charIndex);
+      charIndex++;
+      setTimeout(typeFeed, 70);
+    } else if (isDeleting && charIndex >= 0) {
+      feedTarget.textContent = currentMessage.substring(0, charIndex);
+      charIndex--;
+      setTimeout(typeFeed, 40);
+    } else {
+      if (!isDeleting) {
+        isDeleting = true;
+        setTimeout(typeFeed, 1200); // pause before deleting
+      } else {
+        isDeleting = false;
+        feedIndex = (feedIndex + 1) % feedMessages.length;
+        setTimeout(typeFeed, 400); // pause before next message
+      }
+    }
+  }
+
+  typeFeed();
 });
 
 // Auto-update copyright year
