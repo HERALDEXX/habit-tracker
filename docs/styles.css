@@ -38,7 +38,8 @@ header img {
   animation: glow 4s infinite ease-in-out;
 }
 
-header h1 .or-text {
+header h1,
+.or-text {
   margin-top: 1rem;
   font-size: 2.5rem;
   text-align: center;

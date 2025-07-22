@@ -163,28 +163,22 @@ document
 
         document.getElementById("macos-instructions").innerHTML = `
   <ol>
-    <li>Open Terminal</li>
-    <li>
-      Run:
-      <code>chmod +x heraldexx-habit-tracker-v${version}-macos</code>
-      <code>./heraldexx-habit-tracker-v${version}-macos</code>
-    </li>
-    <li>
-      If you see a security prompt, go to:
+    <li>Click to download<br>Navigate to the Downloads folder and open a terminal</li>
+    <li>Run:  <code>chmod +x heraldexx-habit-tracker-v${version}-macos</code>
+    <br>
+  Then run: <code>./heraldexx-habit-tracker-v${version}-macos</code></li>
+    <li>If you see a security prompt, go to:
 <span>System Settings → Privacy & Security → Allow the app 
-manually</span>
-    </li>
+manually</span></li>
   </ol>
 `;
 
         document.getElementById("linux-instructions").innerHTML = `
 <ol>
-  <li>Open a terminal</li>
-  <li>
-    Run:
-    <code>chmod +x heraldexx-habit-tracker-v${version}-linux</code>
-    <code>./heraldexx-habit-tracker-v${version}-linux</code>
-  </li>
+  <li>Click to download<br>Navigate to the Downloads folder and open a terminal</li>
+  <li>Run:  <code>chmod +x heraldexx-habit-tracker-v${version}-linux</code>
+  <br>
+  Then run: <code>./heraldexx-habit-tracker-v${version}-linux</code></li>
   <li>Make sure you have Python 3.8+ installed</li>
 </ol>
 `;
