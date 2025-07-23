@@ -236,3 +236,30 @@ document.addEventListener("click", (e) => {
     }
   }
 });
+
+// Updated dropdown toggle logic
+document.addEventListener("click", function (e) {
+  const isToggle = e.target.closest(".dropdown-toggle");
+  const openDropdown = document.querySelector(".dropdown.show"); // Check if the click is inside the dropdown menu
+
+  const insideDropdownMenu = e.target.closest(".dropdown-menu");
+
+  if (openDropdown && !isToggle && !insideDropdownMenu) {
+    openDropdown.classList.remove("show");
+  }
+
+  if (isToggle) {
+    const dropdown = isToggle.closest(".dropdown");
+    dropdown.classList.toggle("show");
+  }
+});
+
+// UX: Close dropdown when a link inside it is clicked
+document.querySelectorAll(".dropdown-menu a").forEach((link) => {
+  link.addEventListener("click", () => {
+    const dropdown = link.closest(".dropdown");
+    if (dropdown) {
+      dropdown.classList.remove("show");
+    }
+  });
+});

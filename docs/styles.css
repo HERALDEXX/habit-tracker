@@ -138,10 +138,12 @@ header h1,
 }
 
 footer {
+  margin-top: 50px;
   text-align: center;
   padding: 2rem;
   font-size: 0.9rem;
   color: #999;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
@@ -632,4 +634,134 @@ body.light-theme .source-link:hover {
 
 .screenshot-wrapper:hover .screenshot-tooltip {
   opacity: 1;
+}
+
+#feedback {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+#feedback h2 {
+  color: #00ffe5;
+  margin-bottom: 1rem;
+}
+
+#feedback p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #ccc;
+}
+
+.feedback-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.feedback-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(to right, #9d00ff, #00ffe5);
+  color: #000;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(0, 255, 229, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.feedback-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 229, 0.6);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(to right, #9d00ff, #00ffe5);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(0, 255, 229, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+  transform: scale(1.05);
+}
+
+@keyframes dropdownPop {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 229, 0.4);
+  padding: 0.5rem 0;
+  min-width: 160px;
+  flex-direction: column;
+  z-index: 9999;
+  transform-origin: top;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.2s ease;
+}
+
+/* 🧠 This is what triggers the animation when shown */
+.dropdown.show .dropdown-menu {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+  animation: dropdownPop 0.25s ease-out;
+}
+
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #00ffe5;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(0, 255, 229, 0.1);
+}
+
+/* Show dropdown when active */
+.dropdown.show .dropdown-menu {
+  display: block;
+}
+
+.github-badge-link {
+  transition: transform 0.2s ease;
+}
+
+.github-badge-link:hover {
+  transform: scale(1.05);
 }
