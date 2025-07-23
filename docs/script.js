@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const feedMessages = [
     "Mobile version coming soon 📱",
-    "Built for devs. Loved by humans ❤️",
+    "Built for everyone. Loved by devs ❤️",
     "Works offline — your habits, your device 🔒",
     "Cross-platform magic in one package ✨",
   ];
@@ -89,6 +89,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   typeFeed();
+});
+
+// Screenshot modal logic
+const modal = document.getElementById("screenshot-modal");
+const modalImg = document.getElementById("modal-img");
+const captionText = document.getElementById("modal-caption");
+const closeBtn = document.querySelector(".close-btn");
+
+document.querySelectorAll(".screenshot-wrapper img").forEach((img) => {
+  img.addEventListener("click", () => {
+    modal.style.display = "block";
+    modalImg.src = img.src;
+    captionText.textContent = img.dataset.caption || "";
+  });
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
 });
 
 // Auto-update copyright year

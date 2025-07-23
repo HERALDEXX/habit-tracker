@@ -22,8 +22,10 @@
         A sleek, cross-platform habit tracker for everyone — with source code
         for devs.<strong
           ><br /><br />Dark mode? <span style="font-size: 1.5em">✅</span
-          ><br />Beautiful Charts? Yup.<br />Works on all platforms? You
-          bet.</strong
+          ><br />Light mode? <span style="font-size: 1.5em">✅</span><br />Cool
+          Charts? Yup.<br />Customizable?
+          <span style="font-size: 1.5em">💯</span><br />Works on all platforms?
+          You bet.</strong
         >
       </p>
       <div id="announcement-feed" class="scroll-animate typewriter-feed"></div>
@@ -202,9 +204,46 @@
       </div>
     </section>
 
+    <section class="screenshots scroll-animate">
+      <h2>Screenshots</h2>
+      <div class="screenshot-grid">
+        <div class="screenshot-wrapper">
+          <img
+            src="assets/screenshots/gui-dark.png"
+            alt="Dark GUI Screenshot"
+            data-caption="Dark Mode GUI"
+          />
+          <span class="screenshot-tooltip">Click to expand</span>
+        </div>
+        <div class="screenshot-wrapper">
+          <img
+            src="assets/screenshots/gui-light.png"
+            alt="Light GUI Screenshot"
+            data-caption="Light Mode GUI"
+          />
+          <span class="screenshot-tooltip">Click to expand</span>
+        </div>
+        <div class="screenshot-wrapper">
+          <img
+            src="assets/screenshots/cli.png"
+            alt="CLI Screenshot"
+            data-caption="CLI in Action"
+          />
+          <span class="screenshot-tooltip">Click to expand</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Lightbox -->
+    <div id="screenshot-modal" class="modal">
+      <span class="close-btn">&times;</span>
+      <img class="modal-content" id="modal-img" />
+      <div id="modal-caption"></div>
+    </div>
+
     <footer class="scroll-animate">
       <p>&copy; <span id="year"></span> Herald Inyang | MIT Licensed</p>
-      <br>
+      <br />
       <!-- Styled GitHub badge link -->
       <a href="https://github.com/HERALDEXX" target="_blank">
         <img
