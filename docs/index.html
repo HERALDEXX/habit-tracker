@@ -42,30 +42,28 @@
             </button>
           </div>
           <div class="hover-info">
-            <button
-              id="download-macos"
-              class="platform-btn"
-              aria-describedby="macos-instructions"
-            >
-              <img src="assets/icons/macos.svg" alt="Download for macOS" />
-              macOS
-            </button>
-            <div class="setup-tooltip">
-              <pre id="macos-instructions">Loading...</pre>
+            <div class="platform-buttons">
+              <button id="download-macos" class="platform-btn">
+                <img src="assets/icons/macos.svg" alt="macOS icon" />
+                App (macOS)
+              </button>
+              <button id="instructions-macos" class="platform-btn secondary">
+                <img src="assets/icons/macos.svg" alt="macOS icon" /> Setup
+                Instructions
+              </button>
             </div>
           </div>
 
           <div class="hover-info">
-            <button
-              id="download-linux"
-              class="platform-btn"
-              aria-describedby="linux-instructions"
-            >
-              <img src="assets/icons/linux.svg" alt="Download for Linux" />
-              Linux
-            </button>
-            <div class="setup-tooltip">
-              <pre id="linux-instructions">Loading...</pre>
+            <div class="platform-buttons">
+              <button id="download-linux" class="platform-btn">
+                <img src="assets/icons/linux.svg" alt="Linux icon" />
+                App (Linux)
+              </button>
+              <button id="instructions-linux" class="platform-btn secondary">
+                <img src="assets/icons/linux.svg" alt="Linux icon" /> Setup
+                Instructions
+              </button>
             </div>
           </div>
 
@@ -112,7 +110,10 @@
         </p>
       </noscript>
 
-      <h1 class="or-text" id="or-text">OR</h1>
+      <div class="divider">
+        <span class="or-text" id="or-text">OR</span>
+      </div>
+
       <a
         href="https://github.com/HERALDEXX/habit-tracker"
         class="cta-btn github-btn"

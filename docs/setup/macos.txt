@@ -1,0 +1,17 @@
+HERALDEXX Habit Tracker – macOS Setup
+
+1. Download the app for macOS.
+
+2. After downloading, rename the file to:
+   habit-tracker
+
+3. Open a Terminal window and navigate to the folder where the file is located.
+
+4. Make the file executable:
+   chmod +x habit-tracker
+
+5. Run the app:
+   ./habit-tracker
+
+6. If macOS blocks the app from running, go to:
+   System Settings → Privacy & Security → Allow Anyway

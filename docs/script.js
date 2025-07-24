@@ -168,44 +168,46 @@ document
           linux: findAsset("linux"),
         };
 
+        const instructionURLs = {
+          windows:
+            "https://heraldexx.github.io/habit-tracker/setup/windows.txt",
+          macos: "https://heraldexx.github.io/habit-tracker/setup/macos.txt",
+          linux: "https://heraldexx.github.io/habit-tracker/setup/linux.txt",
+        };
+
         for (const key in links) {
-          const btn = document.getElementById(`download-${key}`);
+          const binaryBtn = document.getElementById(`download-${key}`);
+          const instructionsBtn = document.getElementById(
+            `instructions-${key}`
+          );
+
           if (links[key]) {
-            btn.onclick = () => window.open(links[key], "_blank");
+            if (binaryBtn) {
+              binaryBtn.onclick = () => window.open(links[key], "_blank");
+            }
+
+            if (instructionsBtn && instructionURLs[key]) {
+              instructionsBtn.onclick = () =>
+                window.open(instructionURLs[key], "_blank");
+            }
           } else {
-            btn.disabled = true;
-            btn.textContent = `${
-              key.charAt(0).toUpperCase() + key.slice(1)
-            } (Not Available)`;
-            btn.style.opacity = 0.5;
-            btn.style.cursor = "not-allowed";
+            if (binaryBtn) {
+              binaryBtn.disabled = true;
+              binaryBtn.textContent = `${
+                key.charAt(0).toUpperCase() + key.slice(1)
+              } (Not Available)`;
+              binaryBtn.style.opacity = 0.5;
+              binaryBtn.style.cursor = "not-allowed";
+            }
+
+            if (instructionsBtn) {
+              instructionsBtn.style.display = "none";
+            }
           }
         } // Set source links
 
         document.getElementById("source-zip").href = zipURL;
         document.getElementById("source-tar").href = tarURL; // macOS instructions with copy buttons
-
-        document.getElementById("macos-instructions").innerHTML = `
-  <ol>
-    <li>Click to download<br>Navigate to the Downloads folder and open a terminal</li>
-    <li>Run:  <code>chmod +x heraldexx-habit-tracker-v${version}-macos</code>
-    <br>
-  Then run: <code>./heraldexx-habit-tracker-v${version}-macos</code></li>
-    <li>If you see a security prompt, go to:
-<span>System Settings → Privacy & Security → Allow the app 
-manually</span></li>
-  </ol>
-`;
-
-        document.getElementById("linux-instructions").innerHTML = `
-<ol>
-  <li>Click to download<br>Navigate to the Downloads folder and open a terminal</li>
-  <li>Run:  <code>chmod +x heraldexx-habit-tracker-v${version}-linux</code>
-  <br>
-  Then run: <code>./heraldexx-habit-tracker-v${version}-linux</code></li>
-  <li>Make sure you have Python 3.8+ installed</li>
-</ol>
-`;
 
         drawer.dataset.loaded = true;
       } catch (err) {

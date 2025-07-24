@@ -38,8 +38,7 @@ header img {
   animation: glow 4s infinite ease-in-out;
 }
 
-header h1,
-.or-text {
+header h1 {
   margin-top: 1rem;
   font-size: 2.5rem;
   text-align: center;
@@ -333,6 +332,25 @@ body.light-theme .github-btn {
   height: 20px;
 }
 
+.platform-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.platform-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #00ffe5;
+  box-shadow: none;
+  font-weight: 500;
+  color: #00ffe5;
+}
+
+.platform-btn.secondary:hover {
+  background: rgba(0, 255, 229, 0.15);
+  color: #fff;
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -513,6 +531,43 @@ body.light-theme .source-link:hover {
   overflow: hidden;
   border-right: 2px solid #00ffe5;
   animation: blinkCursor 0.75s infinite;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(0, 255, 229, 0.3);
+  box-shadow: 0 0 8px rgba(0, 255, 229, 0.2);
+}
+
+.divider::before {
+  margin-right: 1rem;
+}
+
+.divider::after {
+  margin-left: 1rem;
+}
+
+.or-text {
+  font-size: 1.5rem;
+  /* adjust to match spacing */
+  font-weight: 700;
+  background: linear-gradient(to right, #9d00ff, #00ffe5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 @keyframes blinkCursor {
