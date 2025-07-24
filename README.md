@@ -3,7 +3,6 @@
   HERALDEXX Habit Tracker v2.2.0
 </h1>
 
-
 <!-- Badges -->
 <p align="left">
   <a href="https://github.com/HERALDEXX/habit-tracker/releases/latest">
@@ -14,15 +13,21 @@
   </a>
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-6A5ACD?style=for-the-badge" alt="Platforms" />
   <img src="https://img.shields.io/badge/python-3.8%2B-blue?style=for-the-badge" alt="Python Version" />
-  <a href="https://github.com/HERALDEXX/habit-tracker/releases">
-  </a>
+</p>
+
+---
+
+<p align="center">
+  👉 <a href="https://heraldexx.github.io/habit-tracker/" target="_blank" style="font-size: 1.5rem; font-weight: bold; text-decoration: none;">
+    🚀 View Official Landing Page
+  </a> 👈
 </p>
 
 ---
 
 <p align="center">
   <strong>A modern Python application for tracking daily habits and maintaining streaks, featuring both CLI and GUI interfaces.</strong>
-</p>  
+</p>
 
 ---
 
@@ -331,11 +336,13 @@ python main.py --lock
 > 📝 **Note:** For Linux and macOS users, you may need to make the file executable first **(as already stated in the platform-specific instructions above)**:
 
 > For Linux:
+>
 > ```bash
 > chmod +x heraldexx-habit-tracker-v2.2.0-linux
 > ```
 
 > For macOS:
+>
 > ```bash
 > chmod +x heraldexx-habit-tracker-v2.2.0-macos
 > ```
