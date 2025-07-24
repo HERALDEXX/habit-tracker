@@ -14,8 +14,14 @@
   </a>
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-6A5ACD?style=for-the-badge" alt="Platforms" />
   <img src="https://img.shields.io/badge/python-3.8%2B-blue?style=for-the-badge" alt="Python Version" />
-  <a href="https://github.com/HERALDEXX/habit-tracker/releases">
-  </a>
+</p>
+
+---
+
+<p align="center">
+  👉 <a href="https://heraldexx.github.io/habit-tracker/" target="_blank" style="font-size: 5.0rem; font-weight: bold; text-decoration: none;">
+    🚀 View Official Landing Page
+  </a> 👈
 </p>
 
 ---
