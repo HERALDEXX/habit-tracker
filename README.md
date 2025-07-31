@@ -43,13 +43,16 @@
 - [Features](#features)
   - [GUI Features](#gui-features)
   - [CLI Features](#cli-features)
+- [📸 Screenshots](#screenshots)  
 - [📁 Project Structure](#project-structure)
 - [🖥️ Command Line Usage For Developers](#command-line-usage-for-developers)
+- [📝 Notes](#notes)
 - [🔒 Development Workflow](#development-workflow)
 - [💾 Data Storage](#data-storage)
 - [🎨 Themes](#themes)
 - [📄 License](#license)
-- [Notes](#notes)
+
+---
 
 ## What's New
 
@@ -154,6 +157,39 @@ pip install -r requirements.txt
 - JSON-based persistent storage
 - Visualization plot generation
 - View MIT license
+
+---
+
+## Screenshots
+
+### 🖼️ GUI Mode
+
+<p align="center">
+  <a href="https://raw.githubusercontent.com/HERALDEXX/habit-tracker/refs/heads/main/docs/assets/screenshots/gui-light.png" target="_blank">
+    <img src="docs/assets/screenshots/gui-light.png" alt="GUI Light Mode" width="350" style="margin: 10px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25);" />
+  </a>
+  <a href="https://raw.githubusercontent.com/HERALDEXX/habit-tracker/refs/heads/main/docs/assets/screenshots/gui-dark.png" target="_blank">
+    <img src="docs/assets/screenshots/gui-dark.png" alt="GUI Dark Mode" width="350" style="margin: 10px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25);" />
+  </a>
+</p>
+<p align="center">
+  <em>Light and Dark Theme Interfaces<br><strong>(click images to enlarge)</strong></em>
+</p>
+
+---
+
+### 💻 CLI Mode
+
+<p align="center">
+  <a href="https://raw.githubusercontent.com/HERALDEXX/habit-tracker/refs/heads/main/docs/assets/screenshots/cli.png" target="_blank">
+    <img src="docs/assets/screenshots/cli.png" alt="CLI Mode" width="500" style="margin: 10px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25);" />
+  </a>
+</p>
+<p align="center">
+  <em>Command-Line Interface (CLI) Mode<br><strong>(click images to enlarge)</strong></em>
+</p>
+
+---
 
 ## Project Structure
 
@@ -407,3 +443,21 @@ This ensures that files are always pushed in their protected (read-only) state.
 > - In GUI mode: Click 'View License' button in the Statistics view
 > - In CLI mode: Use the `-l` or `--license` option
 > - Or read the LICENSE file in the source code project root
+
+---
+
+<div align="center">
+    <p>
+        <strong style="font-weight: bold;">MIT Licensed • © 2025 Herald Inyang •</strong> 
+        <a href="https://github.com/HERALDEXX" target="_blank">
+            <img src="https://img.shields.io/badge/GitHub-HERALDEXX-000?style=flat-square&logo=github" alt="GitHub Badge" style="vertical-align: middle;" />
+        </a>
+    </p>
+    <p>
+        <a href="https://raw.githubusercontent.com/HERALDEXX/habit-tracker/refs/heads/main/LICENSE">
+            <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="MIT License" style="vertical-align: middle;" />
+        </a>
+    </p>
+</div>
+
+---
