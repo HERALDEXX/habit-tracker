@@ -44,25 +44,6 @@ python main.py --lock
    - habit_engine/**init**.py
 3. The PR will be merged once you have the sign-off of another developer
 
-## Code of Conduct
-
-### Our Pledge
-
-We pledge to make participation in our project a harassment-free experience for everyone.
-
-### Our Standards
-
-Examples of behavior that contributes to creating a positive environment include:
-
-- Using welcoming and inclusive language
-- Being respectful of differing viewpoints
-- Accepting constructive criticism
-- Focusing on what is best for the community
-
-### Our Responsibilities
-
-Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
-
 ## Questions?
 
 Feel free to open an issue for:
